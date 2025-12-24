@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Ring 🎄</title>
+<title>Magic Gift 🎄</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
@@ -27,7 +27,6 @@ body{
     animation:ring 0.8s infinite;
 }
 
-/* rung rung */
 @keyframes ring{
     0%{transform:rotate(0deg);}
     25%{transform:rotate(2deg);}
@@ -36,16 +35,14 @@ body{
     100%{transform:rotate(0deg);}
 }
 
-.gift.open{
-    animation:none;
-}
+.gift.open{ animation:none; }
 
 /* box */
 .box{
-    width:140px;
-    height:100px;
+    width:150px;
+    height:110px;
     background:#c1121f;
-    border-radius:8px;
+    border-radius:10px;
     position:relative;
 }
 
@@ -55,26 +52,26 @@ body{
     background:gold;
 }
 .ribbon-v{
-    width:20px;
+    width:22px;
     height:100%;
     left:50%;
     transform:translateX(-50%);
 }
 .ribbon-h{
-    height:20px;
+    height:22px;
     width:100%;
-    top:40%;
+    top:42%;
 }
 
 /* lid */
 .lid{
     position:absolute;
-    width:150px;
-    height:35px;
+    width:160px;
+    height:38px;
     background:#9b0d18;
-    top:-30px;
+    top:-32px;
     left:-5px;
-    border-radius:8px;
+    border-radius:10px;
     transform-origin:bottom;
     transition:transform 0.8s ease;
 }
@@ -83,51 +80,57 @@ body{
     transform:rotateX(120deg);
 }
 
-/* ✨ sparkle */
-.sparkle{
+/* 💡 glow */
+.glow{
     position:absolute;
-    font-size:14px;
-    color:gold;
+    inset:-60px;
+    background:radial-gradient(circle,rgba(255,215,0,0.6),transparent 70%);
     opacity:0;
-    animation:spark 1.5s ease-out forwards;
+    transition:0.6s;
 }
 
-@keyframes spark{
-    0%{transform:scale(0);opacity:1;}
-    100%{transform:translateY(-120px) scale(1.4);opacity:0;}
+.gift.open .glow{ opacity:1; }
+
+/* ✨ glitter */
+.glitter{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:gold;
+    border-radius:50%;
+    box-shadow:0 0 8px gold;
+    animation:spread 1.8s ease-out forwards;
+}
+
+@keyframes spread{
+    from{
+        transform:translate(0,0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translate(var(--x),var(--y)) scale(0.3);
+        opacity:0;
+    }
 }
 
 /* 💌 caption */
 .caption{
     position:absolute;
-    top:-20px;
+    top:-30px;
     left:50%;
     transform:translateX(-50%);
     background:rgba(255,255,255,0.15);
-    padding:15px 20px;
-    border-radius:16px;
+    padding:16px 22px;
+    border-radius:18px;
+    width:280px;
     text-align:center;
-    width:260px;
     font-size:22px;
     opacity:0;
     transition:0.8s;
 }
 
 .gift.open .caption{
-    top:-180px;
-    opacity:1;
-}
-
-/* glow */
-.glow{
-    position:absolute;
-    inset:-40px;
-    background:radial-gradient(circle,rgba(255,215,0,0.5),transparent 70%);
-    opacity:0;
-    transition:0.6s;
-}
-
-.gift.open .glow{
+    top:-200px;
     opacity:1;
 }
 </style>
@@ -139,8 +142,8 @@ body{
 
     <div class="caption">
         🎄 Merry Christmas 🎄<br>
-        Món quà nhỏ nhưng<br>
-        tình yêu là thật ❤️
+        Khi mở món quà này<br>
+        cũng là lúc anh trao trọn yêu thương ❤️
     </div>
 
     <div class="lid"></div>
@@ -156,20 +159,27 @@ const gift = document.getElementById("gift");
 gift.addEventListener("click",()=>{
     if(gift.classList.contains("open")) return;
     gift.classList.add("open");
-    createSparkles();
+    glitterBurst();
 });
 
-/* tạo lấp lánh */
-function createSparkles(){
-    for(let i=0;i<25;i++){
-        const s=document.createElement("div");
-        s.className="sparkle";
-        s.innerHTML=Math.random()>0.5?"✨":"⭐";
-        s.style.left=50+Math.random()*100-50+"px";
-        s.style.top=30+Math.random()*40+"px";
-        s.style.animationDelay=Math.random()*0.5+"s";
-        gift.appendChild(s);
-        setTimeout(()=>s.remove(),1500);
+/* ✨ Kim tuyến lan tỏa */
+function glitterBurst(){
+    const total = 60;
+    for(let i=0;i<total;i++){
+        const g=document.createElement("div");
+        g.className="glitter";
+
+        const angle = Math.random()*2*Math.PI;
+        const distance = Math.random()*180+40;
+
+        g.style.setProperty("--x",Math.cos(angle)*distance+"px");
+        g.style.setProperty("--y",Math.sin(angle)*distance+"px");
+
+        g.style.left="75px";
+        g.style.top="50px";
+        gift.appendChild(g);
+
+        setTimeout(()=>g.remove(),1800);
     }
 }
 </script>
