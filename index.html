@@ -3,110 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merry Christmas ❤️</title>
+<title>Noel Gift 🎁</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
-        overflow: hidden;
-        font-family: 'Dancing+Script', cursive;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+}
 
-    .card {
-        background: rgba(255,255,255,0.12);
-        backdrop-filter: blur(6px);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 0 30px rgba(255,255,255,0.2);
-        max-width: 90%;
-    }
+/* 🌲 Tree */
+.tree {
+    position: relative;
+    width: 0;
+    height: 0;
+}
 
-    h1 {
-        font-size: 48px;
-        color: #ffdddd;
-        margin-bottom: 20px;
-    }
+.layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 160px solid #1f7a3f;
+}
 
-    p {
-        font-size: 26px;
-        line-height: 1.5;
-        min-height: 80px;
-    }
+.layer:nth-child(1) { top: 0; }
+.layer:nth-child(2) {
+    top: 80px;
+    border-left-width: 150px;
+    border-right-width: 150px;
+    border-bottom-width: 190px;
+}
+.layer:nth-child(3) {
+    top: 180px;
+    border-left-width: 180px;
+    border-right-width: 180px;
+    border-bottom-width: 220px;
+}
 
-    .heart {
-        position: absolute;
-        color: pink;
-        font-size: 20px;
-        animation: floatUp 4s linear infinite;
-    }
+.star {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    color: gold;
+    animation: twinkle 1.5s infinite alternate;
+}
 
-    @keyframes floatUp {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
-    }
+@keyframes twinkle {
+    from { opacity: 0.6; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.2); }
+}
 
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
+/* 🎁 Gift Box */
+.gift {
+    position: absolute;
+    top: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
 
-    button {
-        margin-top: 25px;
-        padding: 10px 25px;
-        border-radius: 30px;
-        border: none;
-        background: #ff4b5c;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-    }
+.box {
+    width: 120px;
+    height: 90px;
+    background: #c1121f;
+    border-radius: 5px;
+    position: relative;
+}
 
-    button:hover {
-        background: #ff1e38;
-    }
+.ribbon {
+    position: absolute;
+    background: gold;
+}
+
+.ribbon.vertical {
+    width: 18px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ribbon.horizontal {
+    height: 18px;
+    width: 100%;
+    top: 40%;
+}
+
+.lid {
+    width: 130px;
+    height: 30px;
+    background: #9b0d18;
+    position: absolute;
+    top: -25px;
+    left: -5px;
+    border-radius: 5px;
+    transform-origin: bottom;
+    transition: transform 0.8s ease;
+}
+
+.gift.open .lid {
+    transform: rotateX(110deg);
+}
+
+/* 💌 Caption */
+.caption {
+    position: absolute;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.15);
+    padding: 15px 20px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 22px;
+    width: 260px;
+    opacity: 0;
+    transition: 0.8s;
+}
+
+.gift.open .caption {
+    opacity: 1;
+    top: -200px;
+}
+
+/* ❄ Snow */
+.snow {
+    position: absolute;
+    top: -10px;
+    color: white;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
 </style>
 </head>
 <body>
 
-<canvas id="snow"></canvas>
+<div class="tree">
+    <div class="star">⭐</div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
 
-<div class="card">
-    <h1>🎄 Merry Christmas 🎄</h1>
-    <p id="typing"></p>
-    <button onclick="createHeart()">❤️ Gửi yêu thương</button>
+    <div class="gift" id="gift">
+        <div class="caption">
+            🎄 Merry Christmas 🎄<br>
+            Anh chúc em luôn hạnh phúc,<br>
+            ấm áp và mỉm cười mỗi ngày ❤️
+        </div>
+
+        <div class="lid"></div>
+        <div class="box">
+            <div class="ribbon vertical"></div>
+            <div class="ribbon horizontal"></div>
+        </div>
+    </div>
 </div>
 
-<h1>Merry Christmas</h1>
-<h2>My love</h2>
-<!-- Nhạc (có thể đổi link) -->
-<audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-/* Typing Effect */
-const text = "Giáng Sinh này anh không mong gì hơn 💖\nChỉ mong mỗi ngày đều được ở bên em.\nChúc người anh yêu luôn hạnh phúc, ấm áp và mỉm cười 🎁✨";
-let index = 0;
-const speed = 50;
-const typing = document.getElementById("typing");
+/* Click open gift */
+const gift = document.getElementById("gift");
+gift.addEventListener("click", () => {
+    gift.classList.toggle("open");
+});
 
-function typeText() {
-    if (index < text.length) {
-        typing.innerHTML += text[index] === "\n" ? "<br>" : text[index];
-        index++;
-        setTimeout(typeText, speed);
-    }
-}
-typeTex
+/* Snow effect*
