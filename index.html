@@ -168,20 +168,71 @@ body{
     top:-210px;
     opacity:1;
 }
+/* ❄ tuyết mặc định */
+.snow{
+  position:absolute;
+  top:-10px;
+  color:white;
+  opacity:0.9;
+  cursor:pointer;
+  animation: fall linear infinite;
+  padding: 4px;
+}
+
+/* khi tan */
+.snow.melt{
+  animation: meltSpread 1s forwards;
+}
+
+/* rơi */
+@keyframes fall{
+  to{ transform: translateY(110vh); }
+}
+
+/* 🔥 TAN RA XUNG QUANH */
+@keyframes meltSpread{
+  0%{
+    transform: scale(1) rotate(0deg);
+    opacity:1;
+    filter: blur(0);
+  }
+  40%{
+    transform: scale(1.25) rotate(12deg);
+    opacity:0.8;
+  }
+  100%{
+    transform: scale(0) rotate(-25deg);
+    opacity:0;
+    filter: blur(6px);
+  }
+}
+
 </style>
 </head>
 <body>
 
 <!-- Đèn Noel -->
 <script>
-for(let i=0;i<20;i++){
-  const l=document.createElement("div");
-  l.className="light";
-  l.style.left=Math.random()*100+"vw";
-  l.style.top=Math.random()*60+"vh";
-  l.style.animationDelay=Math.random()*2+"s";
-  document.body.appendChild(l);
+for(let i=0;i<70;i++){
+  const s=document.createElement("div");
+  s.className="snow";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.fontSize=Math.random()*14+10+"px";
+  s.style.animationDuration=Math.random()*5+5+"s";
+
+  s.addEventListener("mouseenter",()=>{
+    if(s.classList.contains("melt")) return;
+
+    s.style.animation = "none";   // ⛔ dừng rơi
+    s.classList.add("melt");      // 🔥 chạy keyframe tan
+
+    setTimeout(()=>s.remove(),800); // ❌ biến mất hoàn toàn
+  });
+
+  document.body.appendChild(s);
 }
+
 </script>
 
 <!-- Tuyết có thể tan -->
@@ -251,3 +302,4 @@ function glitterBurst(){
 
 </body>
 </html>
+>
