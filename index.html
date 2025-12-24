@@ -1,306 +1,347 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christmas Snow Magic 🎄</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Snow Magic 🎄</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
-<style>
-body{
-    margin:0;
-    height:100vh;
-    background:
-      radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 40%),
-      linear-gradient(180deg, #0f2027, #203a43, #2c5364);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    font-family:'Dancing Script',cursive;
-    color:white;
-}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.15), transparent 40%),
+        linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Dancing Script', cursive;
+      color: white;
+    }
 
-/* ===== SNOW ===== */
-.snow{
-    position:absolute;
-    top:-10px;
-    color:white;
-    opacity:0.9;
-    cursor:pointer;
-    animation:fall linear infinite;
-    transition:transform 0.6s ease, opacity 0.6s ease, filter 0.6s;
-}
+    /* ===== SNOW ===== */
+    .snow {
+      position: absolute;
+      top: -10px;
+      color: white;
+      opacity: 0.9;
+      cursor: pointer;
+      animation: fall linear infinite;
+      transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s;
+    }
 
-/* ❄ Tan khi chạm chuột */
-.snow:hover{
-    transform:scale(0);
-    opacity:0;
-    filter:blur(4px);
-}
+    /* ❄ Tan khi chạm chuột */
+    .snow:hover {
+      transform: scale(0);
+      opacity: 0;
+      filter: blur(4px);
+    }
 
-/* rơi */
-@keyframes fall{
-    to{ transform:translateY(110vh); }
-}
+    /* rơi */
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
 
-/* ===== LIGHTS ===== */
-.light{
-    position:absolute;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:rgba(255,215,0,0.8);
-    box-shadow:0 0 20px rgba(255,215,0,0.8);
-    animation:twinkle 2s infinite alternate;
-}
+    /* ===== LIGHTS ===== */
+    .light {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      animation: twinkle 2s infinite alternate;
+    }
 
-@keyframes twinkle{
-    from{opacity:.3; transform:scale(0.8);}
-    to{opacity:1; transform:scale(1.2);}
-}
+    @keyframes twinkle {
+      from {
+        opacity: .3;
+        transform: scale(0.8);
+      }
 
-/* ===== GIFT ===== */
-.gift{
-    position:relative;
-    cursor:pointer;
-    animation:ring 0.8s infinite;
-    z-index:2;
-}
+      to {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
 
-@keyframes ring{
-    0%{transform:rotate(0deg);}
-    25%{transform:rotate(2deg);}
-    50%{transform:rotate(0deg);}
-    75%{transform:rotate(-2deg);}
-    100%{transform:rotate(0deg);}
-}
+    /* ===== GIFT ===== */
+    .gift {
+      position: relative;
+      cursor: pointer;
+      animation: ring 0.8s infinite;
+      z-index: 2;
+    }
 
-.gift.open{ animation:none; }
+    @keyframes ring {
+      0% {
+        transform: rotate(0deg);
+      }
 
-/* box */
-.box{
-    width:150px;
-    height:110px;
-    background:#c1121f;
-    border-radius:10px;
-    position:relative;
-}
+      25% {
+        transform: rotate(2deg);
+      }
 
-.ribbon-v,.ribbon-h{
-    position:absolute;
-    background:gold;
-}
-.ribbon-v{
-    width:22px;
-    height:100%;
-    left:50%;
-    transform:translateX(-50%);
-}
-.ribbon-h{
-    height:22px;
-    width:100%;
-    top:42%;
-}
+      50% {
+        transform: rotate(0deg);
+      }
 
-/* lid */
-.lid{
-    position:absolute;
-    width:160px;
-    height:38px;
-    background:#9b0d18;
-    top:-32px;
-    left:-5px;
-    border-radius:10px;
-    transform-origin:bottom;
-    transition:transform 0.8s ease;
-}
+      75% {
+        transform: rotate(-2deg);
+      }
 
-.gift.open .lid{
-    transform:rotateX(120deg);
-}
+      100% {
+        transform: rotate(0deg);
+      }
+    }
 
-/* glow */
-.glow{
-    position:absolute;
-    inset:-70px;
-    background:radial-gradient(circle,rgba(255,215,0,0.6),transparent 70%);
-    opacity:0;
-    transition:0.6s;
-}
+    .gift.open {
+      animation: none;
+    }
 
-.gift.open .glow{ opacity:1; }
+    /* box */
+    .box {
+      width: 150px;
+      height: 110px;
+      background: #c1121f;
+      border-radius: 10px;
+      position: relative;
+    }
 
-/* glitter */
-.glitter{
-    position:absolute;
-    width:6px;
-    height:6px;
-    background:gold;
-    border-radius:50%;
-    box-shadow:0 0 8px gold;
-    animation:spread 1.8s ease-out forwards;
-}
+    .ribbon-v,
+    .ribbon-h {
+      position: absolute;
+      background: gold;
+    }
 
-@keyframes spread{
-    from{transform:translate(0,0) scale(1);opacity:1;}
-    to{transform:translate(var(--x),var(--y)) scale(0.3);opacity:0;}
-}
+    .ribbon-v {
+      width: 22px;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
-/* caption */
-.caption{
-    position:absolute;
-    top:-30px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(255,255,255,0.18);
-    padding:16px 24px;
-    border-radius:18px;
-    width:280px;
-    text-align:center;
-    font-size:22px;
-    opacity:0;
-    transition:0.8s;
-}
+    .ribbon-h {
+      height: 22px;
+      width: 100%;
+      top: 42%;
+    }
 
-.gift.open .caption{
-    top:-210px;
-    opacity:1;
-}
-/* ❄ tuyết mặc định */
-.snow{
-  position:absolute;
-  top:-10px;
-  color:white;
-  opacity:0.9;
-  cursor:pointer;
-  animation: fall linear infinite;
-  padding: 4px;
-}
+    /* lid */
+    .lid {
+      position: absolute;
+      width: 160px;
+      height: 38px;
+      background: #9b0d18;
+      top: -32px;
+      left: -5px;
+      border-radius: 10px;
+      transform-origin: bottom;
+      transition: transform 0.8s ease;
+    }
 
-/* khi tan */
-.snow.melt{
-  animation: meltSpread 1s forwards;
-}
+    .gift.open .lid {
+      transform: rotateX(120deg);
+    }
 
-/* rơi */
-@keyframes fall{
-  to{ transform: translateY(110vh); }
-}
+    /* glow */
+    .glow {
+      position: absolute;
+      inset: -70px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.6), transparent 70%);
+      opacity: 0;
+      transition: 0.6s;
+    }
 
-/* 🔥 TAN RA XUNG QUANH */
-@keyframes meltSpread{
-  0%{
-    transform: scale(1) rotate(0deg);
-    opacity:1;
-    filter: blur(0);
-  }
-  40%{
-    transform: scale(1.25) rotate(12deg);
-    opacity:0.8;
-  }
-  100%{
-    transform: scale(0) rotate(-25deg);
-    opacity:0;
-    filter: blur(6px);
-  }
-}
+    .gift.open .glow {
+      opacity: 1;
+    }
 
-</style>
+    /* glitter */
+    .glitter {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      box-shadow: 0 0 8px gold;
+      animation: spread 1.8s ease-out forwards;
+    }
+
+    @keyframes spread {
+      from {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      to {
+        transform: translate(var(--x), var(--y)) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* caption */
+    .caption {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.18);
+      padding: 16px 24px;
+      border-radius: 18px;
+      width: 280px;
+      text-align: center;
+      font-size: 22px;
+      opacity: 0;
+      transition: 0.8s;
+    }
+
+    .gift.open .caption {
+      top: -210px;
+      opacity: 1;
+    }
+
+    /* ❄ tuyết mặc định */
+    .snow {
+      position: absolute;
+      top: -10px;
+      color: white;
+      opacity: 0.9;
+      cursor: pointer;
+      animation: fall linear infinite;
+      padding: 4px;
+    }
+
+    /* khi tan */
+    .snow.melt {
+      animation: meltSpread 1s forwards;
+    }
+
+    /* rơi */
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    /* 🔥 TAN RA XUNG QUANH */
+    @keyframes meltSpread {
+      0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      40% {
+        transform: scale(1.25) rotate(12deg);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(0) rotate(-25deg);
+        opacity: 0;
+        filter: blur(6px);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Đèn Noel -->
-<script>
-for(let i=0;i<70;i++){
-  const s=document.createElement("div");
-  s.className="snow";
-  s.innerHTML="❄";
-  s.style.left=Math.random()*100+"vw";
-  s.style.fontSize=Math.random()*14+10+"px";
-  s.style.animationDuration=Math.random()*5+5+"s";
+  <!-- Đèn Noel -->
+  <script>
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement("div");
+      s.className = "snow";
+      s.innerHTML = "❄";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.fontSize = Math.random() * 14 + 10 + "px";
+      s.style.animationDuration = Math.random() * 5 + 5 + "s";
+      s.addEventListener("mouseenter", () => {
+        if (s.classList.contains("melt")) return;
+        s.style.animation = "none"; // ⛔ dừng rơi
+        s.classList.add("melt"); // 🔥 chạy keyframe tan
+        setTimeout(() => s.remove(), 800); // ❌ biến mất hoàn toàn
+      });
+      document.body.appendChild(s);
+    }
+  </script>
 
-  s.addEventListener("mouseenter",()=>{
-    if(s.classList.contains("melt")) return;
+  <!-- Tuyết có thể tan -->
+  <script>
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement("div");
+      s.className = "snow";
+      s.innerHTML = "❄";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.fontSize = Math.random() * 14 + 10 + "px";
+      s.style.animationDuration = Math.random() * 5 + 5 + "s";
+      document.body.appendChild(s);
+    }
+  </script>
 
-    s.style.animation = "none";   // ⛔ dừng rơi
-    s.classList.add("melt");      // 🔥 chạy keyframe tan
-
-    setTimeout(()=>s.remove(),800); // ❌ biến mất hoàn toàn
-  });
-
-  document.body.appendChild(s);
-}
-
-</script>
-
-<!-- Tuyết có thể tan -->
-<script>
-for(let i=0;i<70;i++){
-  const s=document.createElement("div");
-  s.className="snow";
-  s.innerHTML="❄";
-  s.style.left=Math.random()*100+"vw";
-  s.style.fontSize=Math.random()*14+10+"px";
-  s.style.animationDuration=Math.random()*5+5+"s";
-  document.body.appendChild(s);
-}
-</script>
-
-<!-- 🎁 Gift -->
-<div class="gift" id="gift">
+  <!-- 🎁 Gift -->
+  <div class="gift" id="gift">
     <div class="glow"></div>
 
     <div class="caption">
-        🎄 Merry Christmas 🎄<br>
-        Ngay cả tuyết cũng tan<br>
-        khi chạm vào yêu thương ❤️
-        <h1>Love iu Simple</h1>
+      🎄 Merry Christmas 🎄<br>
+      Ngay cả tuyết cũng tan<br>
+      khi chạm vào yêu thương ❤️
+      <h1>Love iu Simple</h1>
     </div>
 
     <div class="lid"></div>
     <div class="box">
-        <div class="ribbon-v"></div>
-        <div class="ribbon-h"></div>
+      <div class="ribbon-v"></div>
+      <div class="ribbon-h"></div>
     </div>
-</div>
+  </div>
 
-<script>
-const gift = document.getElementById("gift");
-
-gift.addEventListener("click", () => {
-  if (gift.classList.contains("open")) {
-    // ĐANG MỞ → ĐÓNG
-    gift.classList.remove("open");
-  } else {
-    // ĐANG ĐÓNG → MỞ
-    gift.classList.add("open");
-    glitterBurst();
-  }
-});
-
-/* Kim tuyến lan tỏa */
-function glitterBurst(){
-  for(let i=0;i<70;i++){
-    const g=document.createElement("div");
-    g.className="glitter";
-
-    const angle=Math.random()*2*Math.PI;
-    const dist=Math.random()*200+40;
-
-    g.style.setProperty("--x",Math.cos(angle)*dist+"px");
-    g.style.setProperty("--y",Math.sin(angle)*dist+"px");
-
-    g.style.left="75px";
-    g.style.top="55px";
-
-    gift.appendChild(g);
-    setTimeout(()=>g.remove(),1800);
-  }
-}
-</script>
+  <script>
+    const gift = document.getElementById("gift");
+    gift.addEventListener("click", () => {
+      if (gift.classList.contains("open")) {
+        // ĐANG MỞ → ĐÓNG
+        gift.classList.remove("open");
+      } else {
+        // ĐANG ĐÓNG → MỞ
+        gift.classList.add("open");
+        glitterBurst();
+      }
+    });
+    /* Kim tuyến lan tỏa */
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement("div");
+      s.className = "snow";
+      s.innerHTML = "❄";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.fontSize = Math.random() * 14 + 10 + "px";
+      s.style.top = "-20px";
+      // ⛔ CHƯA CHO RƠI
+      s.style.animation = "none";
+      document.body.appendChild(s);
+      // ✅ FRAME SAU MỚI CHO RƠI
+      requestAnimationFrame(() => {
+        s.style.animation = `fall ${Math.random()*5+5}s linear infinite`;
+      });
+      // Hover tan
+      s.addEventListener("mouseenter", () => {
+        if (s.classList.contains("melt")) return;
+        s.style.animation = "none";
+        s.classList.add("melt");
+        setTimeout(() => s.remove(), 800);
+      });
+    }
+  </script>
 
 </body>
+
 </html>
 >
