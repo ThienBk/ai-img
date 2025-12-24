@@ -3,181 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noel Gift 🎁</title>
+<title>Gift Ring 🎄</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #1b2735, #090a0f);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    color: white;
-    font-family: 'Dancing Script', cursive;
+body{
+    margin:0;
+    height:100vh;
+    background: radial-gradient(circle at top,#1b2735,#090a0f);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:'Dancing Script',cursive;
+    color:white;
 }
 
-/* 🌲 Tree */
-.tree {
-    position: relative;
-    width: 0;
-    height: 0;
+/* 🎁 Gift */
+.gift{
+    position:relative;
+    cursor:pointer;
+    animation:ring 0.8s infinite;
 }
 
-.layer {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 120px solid transparent;
-    border-right: 120px solid transparent;
-    border-bottom: 160px solid #1f7a3f;
+/* rung rung */
+@keyframes ring{
+    0%{transform:rotate(0deg);}
+    25%{transform:rotate(2deg);}
+    50%{transform:rotate(0deg);}
+    75%{transform:rotate(-2deg);}
+    100%{transform:rotate(0deg);}
 }
 
-.layer:nth-child(1) { top: 0; }
-.layer:nth-child(2) {
-    top: 80px;
-    border-left-width: 150px;
-    border-right-width: 150px;
-    border-bottom-width: 190px;
-}
-.layer:nth-child(3) {
-    top: 180px;
-    border-left-width: 180px;
-    border-right-width: 180px;
-    border-bottom-width: 220px;
+.gift.open{
+    animation:none;
 }
 
-.star {
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
-    color: gold;
-    animation: twinkle 1.5s infinite alternate;
+/* box */
+.box{
+    width:140px;
+    height:100px;
+    background:#c1121f;
+    border-radius:8px;
+    position:relative;
 }
 
-@keyframes twinkle {
-    from { opacity: 0.6; transform: scale(1); }
-    to { opacity: 1; transform: scale(1.2); }
+/* ribbon */
+.ribbon-v,.ribbon-h{
+    position:absolute;
+    background:gold;
+}
+.ribbon-v{
+    width:20px;
+    height:100%;
+    left:50%;
+    transform:translateX(-50%);
+}
+.ribbon-h{
+    height:20px;
+    width:100%;
+    top:40%;
 }
 
-/* 🎁 Gift Box */
-.gift {
-    position: absolute;
-    top: 420px;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
+/* lid */
+.lid{
+    position:absolute;
+    width:150px;
+    height:35px;
+    background:#9b0d18;
+    top:-30px;
+    left:-5px;
+    border-radius:8px;
+    transform-origin:bottom;
+    transition:transform 0.8s ease;
 }
 
-.box {
-    width: 120px;
-    height: 90px;
-    background: #c1121f;
-    border-radius: 5px;
-    position: relative;
+.gift.open .lid{
+    transform:rotateX(120deg);
 }
 
-.ribbon {
-    position: absolute;
-    background: gold;
+/* ✨ sparkle */
+.sparkle{
+    position:absolute;
+    font-size:14px;
+    color:gold;
+    opacity:0;
+    animation:spark 1.5s ease-out forwards;
 }
 
-.ribbon.vertical {
-    width: 18px;
-    height: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+@keyframes spark{
+    0%{transform:scale(0);opacity:1;}
+    100%{transform:translateY(-120px) scale(1.4);opacity:0;}
 }
 
-.ribbon.horizontal {
-    height: 18px;
-    width: 100%;
-    top: 40%;
+/* 💌 caption */
+.caption{
+    position:absolute;
+    top:-20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,0.15);
+    padding:15px 20px;
+    border-radius:16px;
+    text-align:center;
+    width:260px;
+    font-size:22px;
+    opacity:0;
+    transition:0.8s;
 }
 
-.lid {
-    width: 130px;
-    height: 30px;
-    background: #9b0d18;
-    position: absolute;
-    top: -25px;
-    left: -5px;
-    border-radius: 5px;
-    transform-origin: bottom;
-    transition: transform 0.8s ease;
+.gift.open .caption{
+    top:-180px;
+    opacity:1;
 }
 
-.gift.open .lid {
-    transform: rotateX(110deg);
+/* glow */
+.glow{
+    position:absolute;
+    inset:-40px;
+    background:radial-gradient(circle,rgba(255,215,0,0.5),transparent 70%);
+    opacity:0;
+    transition:0.6s;
 }
 
-/* 💌 Caption */
-.caption {
-    position: absolute;
-    top: -160px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255,255,255,0.15);
-    padding: 15px 20px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 22px;
-    width: 260px;
-    opacity: 0;
-    transition: 0.8s;
-}
-
-.gift.open .caption {
-    opacity: 1;
-    top: -200px;
-}
-
-/* ❄ Snow */
-.snow {
-    position: absolute;
-    top: -10px;
-    color: white;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    to { transform: translateY(110vh); }
+.gift.open .glow{
+    opacity:1;
 }
 </style>
 </head>
 <body>
 
-<div class="tree">
-    <div class="star">⭐</div>
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="layer"></div>
+<div class="gift" id="gift">
+    <div class="glow"></div>
 
-    <div class="gift" id="gift">
-        <div class="caption">
-            🎄 Merry Christmas 🎄<br>
-            Anh chúc em luôn hạnh phúc,<br>
-            ấm áp và mỉm cười mỗi ngày ❤️
-        </div>
+    <div class="caption">
+        🎄 Merry Christmas 🎄<br>
+        Món quà nhỏ nhưng<br>
+        tình yêu là thật ❤️
+    </div>
 
-        <div class="lid"></div>
-        <div class="box">
-            <div class="ribbon vertical"></div>
-            <div class="ribbon horizontal"></div>
-        </div>
+    <div class="lid"></div>
+    <div class="box">
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
     </div>
 </div>
 
 <script>
-/* Click open gift */
 const gift = document.getElementById("gift");
-gift.addEventListener("click", () => {
-    gift.classList.toggle("open");
+
+gift.addEventListener("click",()=>{
+    if(gift.classList.contains("open")) return;
+    gift.classList.add("open");
+    createSparkles();
 });
 
-/* Snow effect*
+/* tạo lấp lánh */
+function createSparkles(){
+    for(let i=0;i<25;i++){
+        const s=document.createElement("div");
+        s.className="sparkle";
+        s.innerHTML=Math.random()>0.5?"✨":"⭐";
+        s.style.left=50+Math.random()*100-50+"px";
+        s.style.top=30+Math.random()*40+"px";
+        s.style.animationDelay=Math.random()*0.5+"s";
+        gift.appendChild(s);
+        setTimeout(()=>s.remove(),1500);
+    }
+}
+</script>
+
+</body>
+</html>
