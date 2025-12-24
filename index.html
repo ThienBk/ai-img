@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christmas Magic Gift 🎄</title>
+<title>Christmas Snow Magic 🎄</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-/* ===== BACKGROUND NOEL ===== */
 body{
     margin:0;
     height:100vh;
@@ -23,7 +22,30 @@ body{
     color:white;
 }
 
-/* Đèn Noel mờ */
+/* ===== SNOW ===== */
+.snow{
+    position:absolute;
+    top:-10px;
+    color:white;
+    opacity:0.9;
+    cursor:pointer;
+    animation:fall linear infinite;
+    transition:transform 0.6s ease, opacity 0.6s ease, filter 0.6s;
+}
+
+/* ❄ Tan khi chạm chuột */
+.snow:hover{
+    transform:scale(0);
+    opacity:0;
+    filter:blur(4px);
+}
+
+/* rơi */
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+
+/* ===== LIGHTS ===== */
 .light{
     position:absolute;
     width:12px;
@@ -37,19 +59,6 @@ body{
 @keyframes twinkle{
     from{opacity:.3; transform:scale(0.8);}
     to{opacity:1; transform:scale(1.2);}
-}
-
-/* Tuyết */
-.snow{
-    position:absolute;
-    top:-10px;
-    color:white;
-    opacity:0.8;
-    animation:fall linear infinite;
-}
-
-@keyframes fall{
-    to{ transform:translateY(110vh); }
 }
 
 /* ===== GIFT ===== */
@@ -79,7 +88,6 @@ body{
     position:relative;
 }
 
-/* ribbon */
 .ribbon-v,.ribbon-h{
     position:absolute;
     background:gold;
@@ -176,9 +184,9 @@ for(let i=0;i<20;i++){
 }
 </script>
 
-<!-- Tuyết -->
+<!-- Tuyết có thể tan -->
 <script>
-for(let i=0;i<60;i++){
+for(let i=0;i<70;i++){
   const s=document.createElement("div");
   s.className="snow";
   s.innerHTML="❄";
@@ -195,8 +203,8 @@ for(let i=0;i<60;i++){
 
     <div class="caption">
         🎄 Merry Christmas 🎄<br>
-        Mùa đông có thể lạnh<br>
-        nhưng bên em là ấm áp nhất ❤️
+        Ngay cả tuyết cũng tan<br>
+        khi chạm vào yêu thương ❤️
     </div>
 
     <div class="lid"></div>
