@@ -1,20 +1,112 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Nhận diện và Lưu trữ Ảnh</title>
-    <link rel="stylesheet" href="main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merry Christmas ❤️</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+        overflow: hidden;
+        font-family: 'Dancing+Script', cursive;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 48px;
+        color: #ffdddd;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 26px;
+        line-height: 1.5;
+        min-height: 80px;
+    }
+
+    .heart {
+        position: absolute;
+        color: pink;
+        font-size: 20px;
+        animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    button {
+        margin-top: 25px;
+        padding: 10px 25px;
+        border-radius: 30px;
+        border: none;
+        background: #ff4b5c;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ff1e38;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload Ảnh để Nhận diện</h1>
-        <form id="uploadForm" enctype="multipart/form-data">
-            <input type="file" id="imageUpload" accept="image/*" required>
-            <button type="submit">Upload</button>
-        </form>
-        <div id="result"></div>
-    </div>
 
-    <script src="main.js"></script>
-</body>
-</html>
+<canvas id="snow"></canvas>
+
+<div class="card">
+    <h1>🎄 Merry Christmas 🎄</h1>
+    <p id="typing"></p>
+    <button onclick="createHeart()">❤️ Gửi yêu thương</button>
+</div>
+
+<h1>Merry Christmas</h1>
+<h2>My love</h2>
+<!-- Nhạc (có thể đổi link) -->
+<audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Typing Effect */
+const text = "Giáng Sinh này anh không mong gì hơn 💖\nChỉ mong mỗi ngày đều được ở bên em.\nChúc người anh yêu luôn hạnh phúc, ấm áp và mỉm cười 🎁✨";
+let index = 0;
+const speed = 50;
+const typing = document.getElementById("typing");
+
+function typeText() {
+    if (index < text.length) {
+        typing.innerHTML += text[index] === "\n" ? "<br>" : text[index];
+        index++;
+        setTimeout(typeText, speed);
+    }
+}
+typeTex
