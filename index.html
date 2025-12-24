@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christmas Snow Melt 🎄</title>
+<title>Christmas Snow Magic 🎄</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
@@ -30,23 +30,19 @@ body{
     opacity:0.9;
     cursor:pointer;
     animation:fall linear infinite;
+    transition:transform 0.6s ease, opacity 0.6s ease, filter 0.6s;
 }
 
-/* animation tan */
-.snow.melt{
-    animation: melt 0.6s forwards;
+/* ❄ Tan khi chạm chuột */
+.snow:hover{
+    transform:scale(0);
+    opacity:0;
+    filter:blur(4px);
 }
 
+/* rơi */
 @keyframes fall{
     to{ transform:translateY(110vh); }
-}
-
-@keyframes melt{
-    to{
-        transform:scale(0);
-        opacity:0;
-        filter:blur(4px);
-    }
 }
 
 /* ===== LIGHTS ===== */
@@ -188,7 +184,7 @@ for(let i=0;i<20;i++){
 }
 </script>
 
-<!-- Tuyết tan rồi biến mất -->
+<!-- Tuyết có thể tan -->
 <script>
 for(let i=0;i<70;i++){
   const s=document.createElement("div");
@@ -197,13 +193,6 @@ for(let i=0;i<70;i++){
   s.style.left=Math.random()*100+"vw";
   s.style.fontSize=Math.random()*14+10+"px";
   s.style.animationDuration=Math.random()*5+5+"s";
-
-  s.addEventListener("mouseenter",()=>{
-      if(s.classList.contains("melt")) return;
-      s.classList.add("melt");
-      setTimeout(()=>s.remove(),600); // 🔥 biến mất hẳn
-  });
-
   document.body.appendChild(s);
 }
 </script>
@@ -214,8 +203,8 @@ for(let i=0;i<70;i++){
 
     <div class="caption">
         🎄 Merry Christmas 🎄<br>
-        Tuyết tan đi thật nhanh,<br>
-        nhưng yêu thương thì ở lại ❤️
+        Ngay cả tuyết cũng tan<br>
+        khi chạm vào yêu thương ❤️
     </div>
 
     <div class="lid"></div>
@@ -226,14 +215,20 @@ for(let i=0;i<70;i++){
 </div>
 
 <script>
-const gift=document.getElementById("gift");
+const gift = document.getElementById("gift");
 
-gift.addEventListener("click",()=>{
-  if(gift.classList.contains("open")) return;
-  gift.classList.add("open");
-  glitterBurst();
+gift.addEventListener("click", () => {
+  if (gift.classList.contains("open")) {
+    // ĐANG MỞ → ĐÓNG
+    gift.classList.remove("open");
+  } else {
+    // ĐANG ĐÓNG → MỞ
+    gift.classList.add("open");
+    glitterBurst();
+  }
 });
 
+/* Kim tuyến lan tỏa */
 function glitterBurst(){
   for(let i=0;i<70;i++){
     const g=document.createElement("div");
