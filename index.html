@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Điền KPI DONE</title>
+<title>KPI DONE</title>
 
 <style>
     body {
@@ -13,37 +13,65 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
         font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+        color: white;
     }
 
-    /* Chữ KPI */
-    .kpi-text {
-        font-size: 72px;
+    .container {
+        text-align: center;
+        z-index: 2;
+    }
+
+    .line {
+        font-size: 48px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 12px 28px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #00ffff, #00b3b3);
+        color: #003333;
+        box-shadow: 0 0 15px rgba(0,255,255,0.7);
+        transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px cyan;
+    }
+
+    .btn:active {
+        transform: scale(0.95);
+    }
+
+    .result {
+        margin-top: 30px;
+        font-size: 56px;
         font-weight: 900;
-        color: white;
-        letter-spacing: 3px;
-        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(20px);
         text-shadow:
             1px 1px 0 #ccc,
-            2px 2px 0 #bbb,
-            3px 3px 0 #aaa,
-            5px 5px 20px rgba(0,0,0,0.7);
-        animation: float 3s ease-in-out infinite, glow 2s infinite alternate;
-        user-select: none;
+            3px 3px 15px rgba(0,0,0,0.6);
+        transition: all 0.6s ease;
     }
 
-    @keyframes float {
-        0%,100% { transform: translateY(0); }
-        50% { transform: translateY(-14px); }
+    .result.show {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    @keyframes glow {
-        from { text-shadow: 0 0 15px cyan; }
-        to   { text-shadow: 0 0 35px cyan; }
-    }
-
-    /* Cursor phát sáng */
+    /* Cursor */
     .cursor {
         position: fixed;
         width: 14px;
@@ -56,7 +84,7 @@
         z-index: 999;
     }
 
-    /* Tia lửa */
+    /* Spark */
     .spark {
         position: fixed;
         width: 6px;
@@ -64,8 +92,9 @@
         border-radius: 50%;
         background: gold;
         pointer-events: none;
-        box-shadow: 0 0 10px gold;
+        box-shadow: 0 0 12px gold;
         animation: spark-fly 0.6s linear forwards;
+        z-index: 998;
     }
 
     @keyframes spark-fly {
@@ -79,33 +108,51 @@
 
 <body>
 
-<div class="kpi-text">Điền KPI DONE</div>
+<div class="container">
+    <div class="line">
+        <span>Anh Thiện đã</span>
+        <button class="btn" id="btn">CLICK</button>
+    </div>
+
+    <div class="result" id="result">
+        Đã điền KPI
+    </div>
+</div>
+
 <div class="cursor" id="cursor"></div>
 
 <script>
     const cursor = document.getElementById("cursor");
+    const result = document.getElementById("result");
 
+    // Cursor follow
     document.addEventListener("mousemove", e => {
         cursor.style.left = e.clientX + "px";
         cursor.style.top  = e.clientY + "px";
     });
 
+    // Spark effect (click anywhere)
     document.addEventListener("click", e => {
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < 18; i++) {
             const spark = document.createElement("div");
             spark.className = "spark";
             spark.style.left = e.clientX + "px";
             spark.style.top  = e.clientY + "px";
 
-            const angle = Math.random() * 360;
+            const angle = Math.random() * Math.PI * 2;
             const distance = Math.random() * 80 + 30;
             spark.style.setProperty("--x", Math.cos(angle) * distance + "px");
             spark.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
             document.body.appendChild(spark);
-
             setTimeout(() => spark.remove(), 600);
         }
+    });
+
+    // Button click → show text
+    document.getElementById("btn").addEventListener("click", e => {
+        e.stopPropagation(); // không double spark
+        result.classList.add("show");
     });
 </script>
 
