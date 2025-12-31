@@ -8,51 +8,70 @@
     body {
         margin: 0;
         height: 100vh;
+        cursor: none;
+        background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         overflow: hidden;
         font-family: 'Segoe UI', sans-serif;
     }
 
+    /* Chữ KPI */
     .kpi-text {
         font-size: 72px;
         font-weight: 900;
-        color: #ffffff;
-        text-transform: uppercase;
+        color: white;
         letter-spacing: 3px;
-
-        /* 3D nổi */
+        text-transform: uppercase;
         text-shadow:
             1px 1px 0 #ccc,
             2px 2px 0 #bbb,
             3px 3px 0 #aaa,
-            4px 4px 0 #999,
-            5px 5px 15px rgba(0,0,0,0.6);
-
-        animation: float 3s ease-in-out infinite,
-                   glow 2s ease-in-out infinite alternate;
+            5px 5px 20px rgba(0,0,0,0.7);
+        animation: float 3s ease-in-out infinite, glow 2s infinite alternate;
+        user-select: none;
     }
 
     @keyframes float {
-        0%   { transform: translateY(0); }
-        50%  { transform: translateY(-15px); }
-        100% { transform: translateY(0); }
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-14px); }
     }
 
     @keyframes glow {
-        from {
-            text-shadow:
-                1px 1px 0 #ccc,
-                3px 3px 10px rgba(0,255,255,0.4),
-                0 0 20px rgba(0,255,255,0.6);
-        }
+        from { text-shadow: 0 0 15px cyan; }
+        to   { text-shadow: 0 0 35px cyan; }
+    }
+
+    /* Cursor phát sáng */
+    .cursor {
+        position: fixed;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: cyan;
+        pointer-events: none;
+        box-shadow: 0 0 15px cyan, 0 0 30px cyan;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+    }
+
+    /* Tia lửa */
+    .spark {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: gold;
+        pointer-events: none;
+        box-shadow: 0 0 10px gold;
+        animation: spark-fly 0.6s linear forwards;
+    }
+
+    @keyframes spark-fly {
         to {
-            text-shadow:
-                1px 1px 0 #ccc,
-                3px 3px 20px rgba(0,255,255,0.8),
-                0 0 35px rgba(0,255,255,1);
+            transform: translate(var(--x), var(--y));
+            opacity: 0;
         }
     }
 </style>
@@ -60,18 +79,33 @@
 
 <body>
 
-<div class="kpi-text" id="kpi">
-    Điền KPI DONE
-</div>
+<div class="kpi-text">Điền KPI DONE</div>
+<div class="cursor" id="cursor"></div>
 
 <script>
-    // Hiệu ứng rung nhẹ khi click
-    const text = document.getElementById("kpi");
+    const cursor = document.getElementById("cursor");
 
-    text.addEventListener("click", () => {
-        text.style.animation = "none";
-        text.offsetHeight; // reset animation
-        text.style.animation = "float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate";
+    document.addEventListener("mousemove", e => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top  = e.clientY + "px";
+    });
+
+    document.addEventListener("click", e => {
+        for (let i = 0; i < 16; i++) {
+            const spark = document.createElement("div");
+            spark.className = "spark";
+            spark.style.left = e.clientX + "px";
+            spark.style.top  = e.clientY + "px";
+
+            const angle = Math.random() * 360;
+            const distance = Math.random() * 80 + 30;
+            spark.style.setProperty("--x", Math.cos(angle) * distance + "px");
+            spark.style.setProperty("--y", Math.sin(angle) * distance + "px");
+
+            document.body.appendChild(spark);
+
+            setTimeout(() => spark.remove(), 600);
+        }
     });
 </script>
 
